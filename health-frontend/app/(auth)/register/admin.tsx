@@ -18,13 +18,7 @@ export default function ReceptionistRegister() {
 
         {/* Form */}
         <View style={styles.form}>
-          <View style={styles.inputGroup}>
-            <Text style={styles.label}>Full Name</Text>
-            <TextInput 
-              style={styles.input}
-              placeholder="Enter your full name"
-            />
-          </View>
+          
 
           <View style={styles.inputGroup}>
             <Text style={styles.label}>Email</Text>
@@ -36,15 +30,7 @@ export default function ReceptionistRegister() {
             />
           </View>
 
-          <View style={styles.inputGroup}>
-            <Text style={styles.label}>Phone Number</Text>
-            <TextInput 
-              style={styles.input}
-              placeholder="Enter your phone number"
-              keyboardType="phone-pad"
-            />
-          </View>
-
+          
           <View style={styles.inputGroup}>
             <Text style={styles.label}>Clinic/Hospital Name</Text>
             <TextInput 
@@ -53,29 +39,7 @@ export default function ReceptionistRegister() {
             />
           </View>
 
-          <View style={styles.inputGroup}>
-            <Text style={styles.label}>Employee ID</Text>
-            <TextInput 
-              style={styles.input}
-              placeholder="Enter your employee ID"
-            />
-          </View>
-
-          <View style={styles.inputGroup}>
-            <Text style={styles.label}>Department</Text>
-            <TextInput 
-              style={styles.input}
-              placeholder="Enter your department"
-            />
-          </View>
-
-          <View style={styles.inputGroup}>
-            <Text style={styles.label}>Work Schedule</Text>
-            <TextInput 
-              style={styles.input}
-              placeholder="e.g., Monday-Friday, 9 AM-5 PM"
-            />
-          </View>
+          
 
           <View style={styles.inputGroup}>
             <Text style={styles.label}>Password</Text>

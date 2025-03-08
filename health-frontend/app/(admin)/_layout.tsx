@@ -2,7 +2,7 @@ import React from 'react';
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
-export default function TabLayout() {
+export default function AdminTabLayout() {
   return (
     <Tabs screenOptions={{ 
       tabBarActiveTintColor: '#0066ff',
@@ -34,13 +34,13 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="clinic"
+        name="doctors"
         options={{
-          title: 'Clinic',
-          tabBarLabel: 'Clinic',
+          title: 'Doctors',
+          tabBarLabel: 'Doctors',
           tabBarIcon: ({ focused }) => (
             <Ionicons 
-              name="medical-outline"
+              name="people-outline"
               size={24} 
               color={focused ? "#0066ff" : "#999"} 
             />
@@ -48,13 +48,13 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="record"
+        name="nfc"
         options={{
-          title: 'Record',
-          tabBarLabel: 'Record',
+          title: 'NFC Cards',
+          tabBarLabel: 'NFC Cards',
           tabBarIcon: ({ focused }) => (
             <Ionicons 
-              name="document-text-outline"
+              name="card-outline"
               size={24} 
               color={focused ? "#0066ff" : "#999"} 
             />
@@ -77,5 +77,4 @@ export default function TabLayout() {
       />
     </Tabs>
   );
-}
-
+} 

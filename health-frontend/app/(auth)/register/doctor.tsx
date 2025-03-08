@@ -18,13 +18,7 @@ export default function DoctorRegister() {
 
         {/* Form */}
         <View style={styles.form}>
-          <View style={styles.inputGroup}>
-            <Text style={styles.label}>Full Name</Text>
-            <TextInput 
-              style={styles.input}
-              placeholder="Enter your full name"
-            />
-          </View>
+          
 
           <View style={styles.inputGroup}>
             <Text style={styles.label}>Email</Text>
@@ -36,47 +30,8 @@ export default function DoctorRegister() {
             />
           </View>
 
-          <View style={styles.inputGroup}>
-            <Text style={styles.label}>Phone Number</Text>
-            <TextInput 
-              style={styles.input}
-              placeholder="Enter your phone number"
-              keyboardType="phone-pad"
-            />
-          </View>
-
-          <View style={styles.inputGroup}>
-            <Text style={styles.label}>Medical License Number</Text>
-            <TextInput 
-              style={styles.input}
-              placeholder="Enter your license number"
-            />
-          </View>
-
-          <View style={styles.inputGroup}>
-            <Text style={styles.label}>Specialization</Text>
-            <TextInput 
-              style={styles.input}
-              placeholder="Enter your specialization"
-            />
-          </View>
-
-          <View style={styles.inputGroup}>
-            <Text style={styles.label}>Years of Experience</Text>
-            <TextInput 
-              style={styles.input}
-              placeholder="Enter years of experience"
-              keyboardType="numeric"
-            />
-          </View>
-
-          <View style={styles.inputGroup}>
-            <Text style={styles.label}>Hospital/Clinic Affiliation</Text>
-            <TextInput 
-              style={styles.input}
-              placeholder="Enter hospital/clinic name"
-            />
-          </View>
+        
+          
 
           <View style={styles.inputGroup}>
             <Text style={styles.label}>Password</Text>

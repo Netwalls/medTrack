@@ -1,6 +1,7 @@
 import { View, Text, TextInput, TouchableOpacity, ScrollView, StyleSheet, SafeAreaView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Link, router } from 'expo-router';
+import CustomButton from '../../../components/CustomButton';
 
 export default function PatientRegister() {
   return (
@@ -25,37 +26,12 @@ export default function PatientRegister() {
           {/* Form */}
           <View style={styles.form}>
             <View style={styles.inputGroup}>
-              <Text style={styles.label}>Full Name</Text>
-              <TextInput 
-                style={styles.input}
-                placeholder="Enter your full name"
-              />
-            </View>
-
-            <View style={styles.inputGroup}>
               <Text style={styles.label}>Email</Text>
               <TextInput 
                 style={styles.input}
                 placeholder="Enter your email"
                 keyboardType="email-address"
                 autoCapitalize="none"
-              />
-            </View>
-
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>Phone Number</Text>
-              <TextInput 
-                style={styles.input}
-                placeholder="Enter your phone number"
-                keyboardType="phone-pad"
-              />
-            </View>
-
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>Date of Birth</Text>
-              <TextInput 
-                style={styles.input}
-                placeholder="DD/MM/YYYY"
               />
             </View>
 
@@ -79,9 +55,12 @@ export default function PatientRegister() {
           </View>
 
           {/* Register Button */}
-          <TouchableOpacity style={styles.registerButton}>
-            <Text style={styles.registerButtonText}>Create Account</Text>
-          </TouchableOpacity>
+          <CustomButton 
+            text="Create Account"
+            onPress={() => {}}
+            size="large"
+            style={{ marginTop: 32 }}
+          />
 
           {/* Login Link */}
           <View style={styles.footer}>
@@ -128,7 +107,7 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   form: {
-    gap: 20,
+    gap: 24,
   },
   inputGroup: {
     gap: 8,
@@ -144,18 +123,6 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 12,
     fontSize: 16,
-  },
-  registerButton: {
-    backgroundColor: '#0D3EED',
-    padding: 16,
-    borderRadius: 12,
-    alignItems: 'center',
-    marginTop: 32,
-  },
-  registerButtonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: '600',
   },
   footer: {
     flexDirection: 'row',
