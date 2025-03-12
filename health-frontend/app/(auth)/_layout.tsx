@@ -6,6 +6,13 @@ export default function AuthLayout() {
       screenOptions={{
         headerShown: false,
       }}
-    />
+      initialRouteName="index"
+    >
+      <Stack.Screen name="index" />
+      <Stack.Screen name="login" />
+      <Stack.Screen name="register/patient" />
+      <Stack.Screen name="register/doctor" />
+      <Stack.Screen name="register/admin" />
+    </Stack>
   );
 }

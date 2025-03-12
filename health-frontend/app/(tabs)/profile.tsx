@@ -1,5 +1,6 @@
 import { View, Text, ScrollView, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 
 export default function Profile() {
   return (
@@ -37,7 +38,8 @@ export default function Profile() {
           ].map((item, index) => (
             <TouchableOpacity key={index} style={styles.menuItem}>
               <View style={styles.menuLeft}>
-              <Ionicons name={item.icon as keyof typeof Ionicons.glyphMap} size={24} color="#666" />                <Text style={styles.menuText}>{item.title}</Text>
+                <Ionicons name={item.icon as keyof typeof Ionicons.glyphMap} size={24} color="#666" />
+                <Text style={styles.menuText}>{item.title}</Text>
               </View>
               <View style={styles.menuRight}>
                 {item.badge ? (
@@ -50,6 +52,15 @@ export default function Profile() {
             </TouchableOpacity>
           ))}
         </View>
+
+        {/* Admin Dashboard Button */}
+        <TouchableOpacity 
+          style={styles.adminButton}
+          onPress={() => router.replace('/(admin)')}
+        >
+          <Ionicons name="desktop-outline" size={24} color="#0066ff" />
+          <Text style={styles.adminText}>Admin Dashboard</Text>
+        </TouchableOpacity>
 
         {/* Logout Button */}
         <TouchableOpacity style={styles.logoutButton}>
@@ -133,6 +144,21 @@ const styles = StyleSheet.create({
   badgeText: {
     color: 'white',
     fontSize: 12,
+    fontWeight: '500',
+  },
+  adminButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 16,
+    borderRadius: 12,
+    backgroundColor: '#f0f7ff',
+    marginBottom: 12,
+  },
+  adminText: {
+    marginLeft: 8,
+    color: '#0066ff',
+    fontSize: 16,
     fontWeight: '500',
   },
   logoutButton: {

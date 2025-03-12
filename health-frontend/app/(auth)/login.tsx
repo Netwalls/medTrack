@@ -12,8 +12,12 @@ export default function Login() {
     // This is a mock check - in a real app, you would verify against your backend
     if (email.toLowerCase().includes('admin')) {
       router.replace('/(admin)');
+    } else if (email.toLowerCase().includes('doctor')) {
+      // Add doctor route when ready
+      router.replace('/(tabs)');
     } else {
-      router.replace('/(tabs)/clinic');
+      // Default to patient route
+      router.replace('/(tabs)');
     }
   };
 
