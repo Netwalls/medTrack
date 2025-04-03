@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 const DoctorSchema = new mongoose.Schema(
     {
@@ -15,6 +15,12 @@ const DoctorSchema = new mongoose.Schema(
         name: {
             type: String,
             required: true,
+        },
+        otp: {
+            type: String,
+        },
+        otpExpiry: {
+            type: Date,
         },
         specialization: {
             type: String,

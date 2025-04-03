@@ -38,7 +38,7 @@ export default function ReceptionistRegister() {
 
         try {
             const response = await fetch(
-                'http://localhost:8000/auth/signupAdmin',
+                'http://localhost:8000/auth/signup/admin',
                 {
                     method: 'POST',
                     headers: {
@@ -170,7 +170,7 @@ export default function ReceptionistRegister() {
                     <Text style={styles.footerText}>
                         Already have an account?{' '}
                     </Text>
-                    <Link href="/(auth)/login" asChild>
+                    <Link href="/(auth)/login/login_admin" asChild>
                         <TouchableOpacity>
                             <Text style={styles.loginLink}>Login</Text>
                         </TouchableOpacity>

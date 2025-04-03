@@ -16,6 +16,7 @@ export default function DoctorRegister() {
     const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [specialization, setSpecialization] = useState('');
 
     const validateEmail = (email: string) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -28,6 +29,7 @@ export default function DoctorRegister() {
             email,
             password,
             name: email.split('@')[0],
+            role: 'doctor', // Added role to request
         });
 
         if (!validateEmail(email)) {
@@ -36,20 +38,19 @@ export default function DoctorRegister() {
         }
 
         try {
-            const response = await fetch(
-                'http://localhost:8000/auth/signupAdmin',
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        email,
-                        password,
-                        name: email.split('@')[0],
-                    }),
-                }
-            );
+            const response = await fetch('http://localhost:8000/auth/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email,
+                    password,
+                    name: email.split('@')[0],
+                    role: 'doctor', // Added role to request
+                    specialization,
+                }),
+            });
 
             console.log('Response status:', response.status);
             const data = await response.json();
@@ -139,6 +140,17 @@ export default function DoctorRegister() {
                             keyboardType="email-address"
                         />
                     </View>
+                    <View style={styles.inputGroup}>
+                        <Text style={styles.label}>Specialization</Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Enter Specialization"
+                            keyboardType="email-address"
+                            autoCapitalize="none"
+                            value={specialization} // Bind the state to the input
+                            onChangeText={setSpecialization} // Update the state on input change
+                        />
+                    </View>
 
                     <View style={styles.inputGroup}>
                         <Text style={styles.label}>Password</Text>
@@ -167,7 +179,7 @@ export default function DoctorRegister() {
                     <Text style={styles.footerText}>
                         Already have an account?{' '}
                     </Text>
-                    <Link href="/(auth)/login" asChild>
+                    <Link href="/(auth)/login/login_doctor" asChild>
                         <TouchableOpacity>
                             <Text style={styles.loginLink}>Login</Text>
                         </TouchableOpacity>

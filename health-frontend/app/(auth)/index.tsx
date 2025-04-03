@@ -25,7 +25,13 @@ export default function Register() {
             >
                 <View style={styles.content}>
                     <View style={styles.optionsContainer}>
-                        <Link href="/(auth)/register/patient" asChild>
+                        <Link
+                            href={{
+                                pathname: '/(auth)/register/patient',
+                                params: { role: 'patient' },
+                            }}
+                            asChild
+                        >
                             <TouchableOpacity style={styles.optionCard}>
                                 <View style={styles.iconContainer}>
                                     <Ionicons
@@ -52,7 +58,13 @@ export default function Register() {
                             </TouchableOpacity>
                         </Link>
 
-                        <Link href="/(auth)/register/doctor" asChild>
+                        <Link
+                            href={{
+                                pathname: '/(auth)/register/doctor',
+                                params: { role: 'doctor' },
+                            }}
+                            asChild
+                        >
                             <TouchableOpacity style={styles.optionCard}>
                                 <View style={styles.iconContainer}>
                                     <Ionicons
@@ -78,7 +90,13 @@ export default function Register() {
                             </TouchableOpacity>
                         </Link>
 
-                        <Link href="/(auth)/register/admin" asChild>
+                        <Link
+                            href={{
+                                pathname: '/(auth)/register/admin',
+                                params: { role: 'admin' },
+                            }}
+                            asChild
+                        >
                             <TouchableOpacity style={styles.optionCard}>
                                 <View style={styles.iconContainer}>
                                     <Ionicons

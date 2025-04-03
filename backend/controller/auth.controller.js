@@ -7,46 +7,81 @@ const Doctor = require('../schema/doctor.schma.js');
 
 const signup = async (req, res) => {
     console.log('Signup request received');
-    const { email, password, name } = req.body;
+    const { email, password, name, role, specialization } = req.body;
 
     try {
+        // Check if email already exists in ANY collection
         const existingUser = await User.findOne({ email });
-        if (existingUser) {
+        const existingAdmin = await Admin.findOne({ email });
+        const existingDoctor = await Doctor.findOne({ email });
+
+        if (existingUser || existingAdmin || existingDoctor) {
             return res.status(400).json({
                 success: false,
                 message: 'Email already registered',
             });
         }
 
-        // Ge nerate OTP
+        // Generate OTP
         const otp = Math.floor(100000 + Math.random() * 900000).toString();
-        console.log('Generated OTP:', otp); // Debug log
+        console.log('Generated OTP:', otp);
 
-        // Create new user with OTP
-        const user = new User({
-            email,
-            password,
-            name,
-            otp, // Make sure this is being set
-            otpExpiry: new Date(Date.now() + 10 * 60 * 1000), // 10 minutes expiry
-            isVerified: false,
-        });
+        let newUser;
+        if (role === 'user') {
+            newUser = new User({
+                email,
+                password,
+                name,
+                otp,
+                otpExpiry: new Date(Date.now() + 10 * 60 * 1000),
+                isVerified: false,
+            });
+        } else if (role === 'admin') {
+            newUser = new Admin({
+                email,
+                password,
+                name,
+                otp,
+                otpExpiry: new Date(Date.now() + 10 * 60 * 1000),
+                isVerified: false,
+            });
+        } else if (role === 'doctor') {
+            // Check if specialization is provided for a doctor
+            if (!specialization) {
+                return res.status(400).json({
+                    success: false,
+                    message: 'Specialization is required for doctors',
+                });
+            }
 
-        const savedUser = await user.save();
-        console.log('Saved user:', savedUser); // Debug log
+            newUser = new Doctor({
+                email,
+                password,
+                name,
+                specialization,
+                otp,
+                otpExpiry: new Date(Date.now() + 10 * 60 * 1000),
+                isVerified: false,
+            });
+        } else {
+            return res.status(400).json({
+                success: false,
+                message: 'Invalid role specified',
+            });
+        }
+
+        await newUser.save();
+        console.log('Saved user:', newUser);
 
         // Send verification email
-        console.log('Attempting to send email to:', email);
-        await sendEmail({
-            to: email,
-            subject: 'One More Step, Verify Your Email',
-            type: 'verification',
-            message: {
-                otp,
-                name,
-            },
-        });
-        console.log('Email sent successfully to:', email);
+        // console.log('Attempting to send email to:', email);
+        // await sendEmail({
+        //     to: email,
+        //     subject: 'One More Step, Verify Your Email',
+        //     type: 'verification',
+        //     message: { otp, name },
+        // });
+        // console.log('Email sent successfully to:', email);
 
         res.status(200).json({
             success: true,
@@ -54,6 +89,12 @@ const signup = async (req, res) => {
                 'Signup successful. Please check your email for verification code.',
         });
     } catch (err) {
+        if (err.code === 11000) {
+            return res.status(400).json({
+                success: false,
+                message: 'Email already registered',
+            });
+        }
         console.error('Error:', err);
         res.status(500).json({
             success: false,
@@ -63,118 +104,6 @@ const signup = async (req, res) => {
 };
 
 module.exports = { signup };
-const signupAdmin = async (req, res) => {
-    console.log('Signup request received');
-    const { email, password, name } = req.body;
-
-    try {
-        const existingAdmin = await Admin.findOne({ email });
-        if (existingAdmin) {
-            return res.status(400).json({
-                success: false,
-                message: 'Email already registered',
-            });
-        }
-
-        // Generate OTP
-        const otp = Math.floor(100000 + Math.random() * 900000).toString();
-        console.log('Generated OTP:', otp); // Debug log
-
-        // Create new user with OTP
-        const admin = new Admin({
-            email,
-            password,
-            name,
-            otp, // Make sure this is being set
-            otpExpiry: new Date(Date.now() + 10 * 60 * 1000), // 10 minutes expiry
-            isVerified: false,
-        });
-
-        const savedAdmin = await admin.save();
-        console.log('Saved admin:', savedAdmin); // Debug log
-
-        // Send verification email
-        console.log('Attempting to send email to:', email);
-        await sendEmail({
-            to: email,
-            subject: 'One More Step, Verify Your Email',
-            type: 'verification',
-            message: {
-                otp,
-                name,
-            },
-        });
-        console.log('Email sent successfully to:', email);
-
-        res.status(200).json({
-            success: true,
-            message:
-                'Signup successful. Please check your email for verification code.',
-        });
-    } catch (err) {
-        console.error('Error:', err);
-        res.status(500).json({
-            success: false,
-            message: 'Admin not created',
-        });
-    }
-};
-const signupDoctor = async (req, res) => {
-    console.log('Signup request received');
-    const { email, password, name } = req.body;
-
-    try {
-        const existingDoctor = await Doctor.findOne({ email });
-        if (existingDoctor) {
-            return res.status(400).json({
-                success: false,
-                message: 'Email already registered',
-            });
-        }
-
-        // Generate OTP
-        const otp = Math.floor(100000 + Math.random() * 900000).toString();
-        console.log('Generated OTP:', otp); // Debug log
-
-        // Create new user with OTP
-        const doctor = new Doctor({
-            email,
-            password,
-            name,
-            otp, // Make sure this is being set
-            otpExpiry: new Date(Date.now() + 10 * 60 * 1000), // 10 minutes expiry
-            isVerified: false,
-        });
-
-        const savedDoctor = await doctor.save();
-        console.log('Saved doctor:', savedDoctor); // Debug log
-
-        // Send verification email
-        console.log('Attempting to send email to:', email);
-        await sendEmail({
-            to: email,
-            subject: 'One More Step, Verify Your Email',
-            type: 'verification',
-            message: {
-                otp,
-                name,
-            },
-        });
-        console.log('Email sent successfully to:', email);
-
-        res.status(200).json({
-            success: true,
-            message:
-                'Signup successful. Please check your email for verification code.',
-        });
-    } catch (err) {
-        console.error('Error:', err);
-        res.status(500).json({
-            success: false,
-            message: 'Doctor not created',
-        });
-    }
-};
 
 const signin = async (req, res) => {
     console.log('Signin request received');
@@ -210,16 +139,16 @@ const signin = async (req, res) => {
             });
         }
 
-        await sendEmail({
-            to: user.email,
-            subject: 'New Sign In Detected',
-            type: 'signin',
-            message: {
-                name: user.name,
-                time: new Date().toLocaleString(),
-                device: req.headers['user-agent'],
-            },
-        });
+        // await sendEmail({
+        //     to: user.email,
+        //     subject: 'New Sign In Detected',
+        //     type: 'signin',
+        //     message: {
+        //         name: user.name,
+        //         time: new Date().toLocaleString(),
+        //         device: req.headers['user-agent'],
+        //     },
+        // });
 
         res.status(200).json({
             success: true,
@@ -244,34 +173,43 @@ const verifyOTP = async (req, res) => {
 
     try {
         const user = await User.findOne({ email });
-        console.log('Found user:', user);
-        console.log('Stored OTP:', user.otp);
-        console.log('Received OTP:', otp);
+        const admin = await Admin.findOne({ email });
+        const doctor = await Doctor.findOne({ email }); // ✅ Added await
 
-        if (!user) {
+        console.log('Found user:', user);
+        console.log('Found admin:', admin);
+        console.log('Found doctor:', doctor);
+
+        // Check if user, admin, or doctor exists
+        if (!user && !admin && !doctor) {
             return res.status(404).json({
                 success: false,
                 message: 'User not found',
             });
         }
 
-        // Check if OTP matches and hasn't expired
-        if (user.otp !== otp) {
+        // Determine which one is found
+        const foundEntity = user || admin || doctor;
+
+        console.log('Stored OTP:', foundEntity?.otp);
+        console.log('Received OTP:', otp);
+
+        if (foundEntity.otp !== otp) {
             return res.status(400).json({
                 success: false,
                 message: 'Invalid OTP',
             });
         }
 
-        if (user.otpExpiry < new Date()) {
+        if (foundEntity.otpExpiry < new Date()) {
             return res.status(400).json({
                 success: false,
                 message: 'OTP has expired',
             });
         }
 
-        // Update user verification status using findOneAndUpdate
-        const updatedUser = await User.findOneAndUpdate(
+        // Update verification status
+        await foundEntity.constructor.findOneAndUpdate(
             { email },
             {
                 $set: {
@@ -284,14 +222,14 @@ const verifyOTP = async (req, res) => {
         );
 
         // Send success verification email
-        await sendEmail({
-            to: email,
-            subject: 'Email Verified Successfully - Welcome to Ahia-Oma',
-            type: 'verifySuccess',
-            message: {
-                name: user.name,
-            },
-        });
+        // await sendEmail({
+        //     to: email,
+        //     subject: 'Email Verified Successfully - Welcome to Ahia-Oma',
+        //     type: 'verifySuccess',
+        //     message: {
+        //         name: foundEntity.name,
+        //     },
+        // });
 
         res.status(200).json({
             success: true,
@@ -305,6 +243,7 @@ const verifyOTP = async (req, res) => {
         });
     }
 };
+
 const forgotPassword = async (req, res) => {
     console.log('Forgot password request received');
     const { email } = req.body;
@@ -397,11 +336,10 @@ const resendOTP = async (req, res) => {
 };
 
 module.exports = {
-    signupAdmin,
     signup,
     signin,
     verifyOTP,
     forgotPassword,
     resendOTP,
-    signupDoctor,
+
 };

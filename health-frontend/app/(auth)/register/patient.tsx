@@ -30,6 +30,7 @@ export default function PatientRegister() {
             email,
             password,
             name: email.split('@')[0],
+            role: 'user', // Added role here
         });
 
         if (!validateEmail(email)) {
@@ -47,12 +48,18 @@ export default function PatientRegister() {
                     email,
                     password,
                     name: email.split('@')[0],
+                    role: 'user', // Added role to request
                 }),
             });
 
-            console.log('Response status:', response.status);
             const data = await response.json();
+            console.log('Response status:', response.status);
             console.log('Response data:', data);
+
+            if (response.status === 400) {
+                Alert.alert('Error', data.message || 'Sign up failed');
+                return;
+            }
 
             if (data.success) {
                 Alert.alert(
@@ -60,7 +67,7 @@ export default function PatientRegister() {
                     'Please check your email for the verification code.',
                     [
                         {
-                            text: 'OK',
+                            text: 'Ok',
                             onPress: () =>
                                 router.push({
                                     pathname: '/(auth)/verifyotp',
@@ -70,6 +77,7 @@ export default function PatientRegister() {
                     ]
                 );
             } else {
+                // Handle email already registered scenario
                 if (data.message === 'Email already registered') {
                     Alert.alert(
                         'Email Already Registered',
@@ -85,7 +93,7 @@ export default function PatientRegister() {
                                     router.push({
                                         pathname: '/(auth)/resendotp',
                                         params: { email },
-                                    } as any), // Added 'as any' to bypass type error
+                                    } as any),
                             },
                         ]
                     );
@@ -100,7 +108,6 @@ export default function PatientRegister() {
                 'Could not connect to server. Please check your internet connection.'
             );
         }
-        console.log(email, password);
     };
 
     return (
@@ -175,7 +182,7 @@ export default function PatientRegister() {
                         <Text style={styles.footerText}>
                             Already have an account?{' '}
                         </Text>
-                        <Link href="/(auth)/login" asChild>
+                        <Link href="/(auth)/login/login_patients" asChild>
                             <TouchableOpacity>
                                 <Text style={styles.loginLink}>Login</Text>
                             </TouchableOpacity>

@@ -59,7 +59,7 @@ export default function VerifyOTP() {
 
         try {
             const response = await fetch(
-                `http://192.168.105.237:8000/auth/verify-otp`,
+                `http://localhost:8000/auth/verify-otp`,
                 {
                     method: 'POST',
                     headers: {
