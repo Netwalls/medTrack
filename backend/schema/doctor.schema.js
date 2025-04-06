@@ -41,6 +41,10 @@ const DoctorSchema = new mongoose.Schema(
             type: String,
             default: 'doctor',
         },
+        profileCompleted: {
+            type: Boolean,
+            default: false,
+        },
     },
     { timestamps: true }
 );

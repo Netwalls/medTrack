@@ -3,7 +3,7 @@
 const { User } = require('../schema/user.schema.js');
 const sendEmail = require('../mail/index.mail');
 const Admin = require('../schema/admin.schema.js');
-const Doctor = require('../schema/doctor.schma.js');
+const Doctor = require('../schema/doctor.schema.js');
 
 const signup = async (req, res) => {
     console.log('Signup request received');

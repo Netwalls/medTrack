@@ -36,7 +36,7 @@ export default function DoctorTabLayout() {
                 }}
             />
             <Tabs.Screen
-                name="doctors"
+                name="patients"
                 options={{
                     title: 'patient',
                     tabBarLabel: 'Patient',

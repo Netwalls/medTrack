@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs'); 
+const bcrypt = require('bcryptjs');
 
 const AdminSchema = new mongoose.Schema(
     {
@@ -19,6 +19,16 @@ const AdminSchema = new mongoose.Schema(
         role: {
             type: String,
             default: 'admin',
+        },
+        profileCompleted: {
+            type: Boolean,
+            default: false,
+        },
+        otp: {
+            type: String,
+        },
+        otpExpiry: {
+            type: Date,
         },
     },
     { timestamps: true }

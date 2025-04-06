@@ -11,8 +11,11 @@ import {
     SafeAreaView,
     Modal,
     TextInput,
+    Alert,
 } from 'react-native';
 import { Ionicons, MaterialCommunityIcons, Feather } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { router } from 'expo-router';
 
 const DoctorProfileScreen = () => {
     const [isAvailable, setIsAvailable] = useState(true);
@@ -39,6 +42,16 @@ const DoctorProfileScreen = () => {
         // Here you would typically make an API call to update the profile
         console.log('Saving profile data:', doctorData);
         setEditMode(false);
+    };
+    const onLogout = async () => {
+        try {
+            await AsyncStorage.removeItem('token');
+            Alert.alert('You have been logged out successfully.');
+            router.replace('/(auth)/login/login_patients');
+        } catch (err) {
+            console.error('Logout error: ', err);
+            Alert.alert('Error', 'Something went wrong during logout.');
+        }
     };
 
     return (
@@ -361,6 +374,7 @@ const DoctorProfileScreen = () => {
 
                         <TouchableOpacity
                             style={[styles.settingItem, styles.logoutItem]}
+                            onPress={onLogout}
                         >
                             <Ionicons
                                 name="log-out-outline"

@@ -48,7 +48,7 @@ export default function Login() {
                     Alert.alert('Success', 'Welcome back!', [
                         {
                             text: 'OK',
-                            onPress: () => router.replace('/(admin)'),
+                            onPress: () => router.replace('/(admin)'), // Removed parentheses
                         },
                     ]);
                 } else {
@@ -57,7 +57,7 @@ export default function Login() {
                             text: 'OK',
                             onPress: () => {
                                 router.push({
-                                    pathname: '/(admin)/doctors',
+                                    pathname: '/(admin)', // Removed parentheses
                                     params: {
                                         email: email,
                                         userId: data.userId,

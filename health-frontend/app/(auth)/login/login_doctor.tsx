@@ -6,17 +6,15 @@ import {
     StyleSheet,
     Alert,
 } from 'react-native';
-import { Link, router } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import CustomButton from '../../../components/CustomButton';
 import { useState } from 'react';
-import { useRouter } from 'expo-router';
 
 export default function Login() {
     const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [loginSuccess, setLoginSuccess] = useState(false); // <-- Define the loginSuccess state
 
     const validateEmail = (email: string) => {
         return email.includes('@') && email.includes('.com');
@@ -31,7 +29,7 @@ export default function Login() {
         }
 
         try {
-            const response = await fetch(`http://localhost:8000/auth/signin`, {
+            const response = await fetch('http://localhost:8000/auth/signin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -39,35 +37,46 @@ export default function Login() {
                 body: JSON.stringify({ email, password }),
             });
 
-            console.log('Response status:', response.status);
             const data = await response.json();
             console.log('Full response data:', data);
 
+            // Debugging: Log profileCompleted
+            console.log(
+                'profileCompleted:',
+                data.profileCompleted,
+                typeof data.profileCompleted
+            );
+
             if (data.success) {
-                if (data.hasCompletedProfile === true) {
-                    Alert.alert('Success', 'Welcome back!', [
-                        {
-                            text: 'OK',
-                            onPress: () => router.replace('/(doctor)'),
-                        },
-                    ]);
-                    if (email.toLowerCase().includes('admin')) {
-                        router.replace('/(admin)');
-                    } else if (email.toLowerCase().includes('doctor')) {
-                        // Add doctor route when ready
-                        router.replace('/(doctor)/patients');
-                    } else {
-                        // Default to patient route
-                        router.replace('/(tabs)');
-                    }
+                if (data.profileCompleted === false) {
+                    // Explicit check
+                    Alert.alert(
+                        'Profile Incomplete',
+                        'Please complete your profile',
+                        [
+                            {
+                                text: 'OK',
+                                onPress: () => {
+                                    router.push({
+                                        pathname:
+                                            '/(profiles)/update_doctors_profile',
+                                        params: {
+                                            email: email,
+                                            userId: data.userId,
+                                            token: data.token,
+                                        },
+                                    });
+                                },
+                            },
+                        ]
+                    );
                 } else {
-                    Alert.alert('Success', 'Please complete your profile', [
+                    Alert.alert('Success', 'Redirecting...', [
                         {
                             text: 'OK',
                             onPress: () => {
                                 router.push({
-                                    pathname:
-                                        '/(profiles)/update_doctors_profile',
+                                    pathname: '/(doctor)',
                                     params: {
                                         email: email,
                                         userId: data.userId,
@@ -146,17 +155,6 @@ export default function Login() {
                     style={{ marginTop: 32 }}
                 />
 
-                {/* Conditionally render the Link after successful login */}
-                {loginSuccess && (
-                    <Link href="./(doctor)/index" asChild>
-                        <TouchableOpacity>
-                            <Text style={styles.loginLink}>
-                                Go to Doctor Dashboard
-                            </Text>
-                        </TouchableOpacity>
-                    </Link>
-                )}
-
                 {/* Register Link */}
                 <View style={styles.footer}>
                     <Text style={styles.footerText}>
@@ -234,10 +232,5 @@ const styles = StyleSheet.create({
     registerLink: {
         color: '#0D3EED',
         fontWeight: '600',
-    },
-    loginLink: {
-        color: '#0D3EED',
-        fontWeight: '600',
-        marginTop: 16,
     },
 });

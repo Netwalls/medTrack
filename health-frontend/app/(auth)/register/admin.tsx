@@ -29,6 +29,7 @@ export default function ReceptionistRegister() {
             email,
             password,
             name: email.split('@')[0],
+            role: 'admin',
         });
 
         if (!validateEmail(email)) {
@@ -37,20 +38,18 @@ export default function ReceptionistRegister() {
         }
 
         try {
-            const response = await fetch(
-                'http://localhost:8000/auth/signup/admin',
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        email,
-                        password,
-                        name,
-                    }),
-                }
-            );
+            const response = await fetch('http://localhost:8000/auth/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email,
+                    password,
+                    name,
+                    role: 'admin',
+                }),
+            });
 
             console.log('Response status:', response.status);
             const data = await response.json();
@@ -102,7 +101,7 @@ export default function ReceptionistRegister() {
                 'Could not connect to server. Please check your internet connection.'
             );
         }
-        console.log(email, password,  name);
+        console.log(email, password, name);
     };
 
     return (
