@@ -44,40 +44,17 @@ export default function Login() {
             console.log('Full response data:', data);
 
             if (data.success) {
-                if (data.hasCompletedProfile === true) {
-                    Alert.alert('Success', 'Welcome back!', [
-                        {
-                            text: 'OK',
-                            onPress: () => router.replace('/(admin)'),
-                        },
-                    ]);
+                Alert.alert('Success', 'Welcome back!', [
+                    {
+                        text: 'OK',
+                        onPress: () => router.replace('/(tabs)/profile'),
+                    },
+                ]);
 
-                    if (email.toLowerCase().includes('admin')) {
-                        router.replace('/(admin)');
-                    } else if (email.toLowerCase().includes('doctor')) {
-                        // Add doctor route when ready
-                        router.replace('/(tabs)');
-                    } else {
-                        // Default to patient route
-                        router.replace('/(tabs)');
-                    }
+                if (email.toLowerCase().includes('admin')) {
+                    router.replace('/(admin)');
                 } else {
-                    Alert.alert('Success', 'Please complete your profile', [
-                        {
-                            text: 'OK',
-                            onPress: () => {
-                                router.push({
-                                    pathname:
-                                        '/(profiles)/update_users_profile',
-                                    params: {
-                                        email: email,
-                                        userId: data.userId,
-                                        token: data.token,
-                                    },
-                                });
-                            },
-                        },
-                    ]);
+                    router.replace('/(tabs)/profile');
                 }
             } else {
                 Alert.alert('Error', data.message || 'Sign in failed');
