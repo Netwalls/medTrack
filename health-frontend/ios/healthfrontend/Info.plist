@@ -27,7 +27,7 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>myapp</string>
+          <string>medtrack</string>
           <string>com.anonymous.healthfrontend</string>
         </array>
       </dict>
