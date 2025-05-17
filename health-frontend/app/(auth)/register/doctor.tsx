@@ -13,6 +13,7 @@ import { useState } from 'react';
 import { useRouter } from 'expo-router';
 
 export default function DoctorRegister() {
+    const BASE_URL = 'http://192.168.1.152:8000';
     const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -38,7 +39,7 @@ export default function DoctorRegister() {
         }
 
         try {
-            const response = await fetch('http://localhost:8000/auth/signup', {
+            const response = await fetch(`${BASE_URL}/auth/signup`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

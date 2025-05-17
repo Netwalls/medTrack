@@ -15,6 +15,10 @@ export default function RootLayout() {
                 <Stack.Screen name="(tabs)" />
                 <Stack.Screen name="(admin)" />
                 <Stack.Screen name="(doctor)" />
+                <Stack.Screen
+                    name="patientBio"
+                    options={{ title: 'Patient Bio' }}
+                />
             </Stack>
         </GestureHandlerRootView>
     );

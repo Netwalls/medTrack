@@ -13,7 +13,7 @@ import { useState } from 'react';
 import { useRouter } from 'expo-router';
 
 export default function ReceptionistRegister() {
-    const BASE_URL = 'http://172.20.10.2:8000';
+    const BASE_URL = 'http://192.168.1.152:8000';
     const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

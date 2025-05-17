@@ -13,6 +13,7 @@ import { useState } from 'react';
 import { useRouter } from 'expo-router';
 
 export default function Login() {
+    const BASE_URL = 'http://192.168.1.152:8000';
     const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -31,7 +32,7 @@ export default function Login() {
         }
 
         try {
-            const response = await fetch(`http://localhost:8000/auth/signin`, {
+            const response = await fetch(`${BASE_URL}/auth/signin`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
