@@ -19,6 +19,9 @@ const UserSchema = new mongoose.Schema(
         otp: {
             type: String,
         },
+        // fallbackotp: {
+        //     type: String
+        // },
         otpExpiry: {
             type: Date,
         },

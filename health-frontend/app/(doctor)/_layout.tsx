@@ -64,6 +64,20 @@ export default function DoctorTabLayout() {
                 }}
             />
             <Tabs.Screen
+                name="nfc"
+                options={{
+                    title: 'NFC',
+                    tabBarLabel: 'NFC',
+                    tabBarIcon: ({ focused }) => (
+                        <Ionicons
+                            name="card-outline"
+                            size={24}
+                            color={focused ? '#0066ff' : '#999'}
+                        />
+                    ),
+                }}
+            />
+            <Tabs.Screen
                 name="profile"
                 options={{
                     title: 'Profile',

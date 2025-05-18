@@ -29,7 +29,7 @@ export default function Clinic() {
                 {[1, 2, 3].map((item) => (
                     <TouchableOpacity key={item} style={styles.clinicCard}>
                         <View style={styles.clinicHeader}>
-                            <Text style={styles.clinicName}>XYZ Hospital</Text>
+                            <Text style={styles.clinicName}>Veritas Clinic</Text>
                             <View style={styles.ratingContainer}>
                                 <Ionicons
                                     name="star"

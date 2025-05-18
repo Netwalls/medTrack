@@ -58,8 +58,8 @@ const DoctorPatientsScreen = () => {
     const mockPatients: Patient[] = [
         {
             id: '1',
-            name: 'John Smith',
-            age: 45,
+            name: 'Kelechi Nwankwoala',
+            age: 20,
             gender: 'Male',
             appointmentDate: '2025-04-05',
             appointmentTime: '09:00 AM',
@@ -71,8 +71,8 @@ const DoctorPatientsScreen = () => {
         },
         {
             id: '2',
-            name: 'Emily Johnson',
-            age: 32,
+            name: 'Chelsea Grasswell',
+            age: 20,
             gender: 'Female',
             appointmentDate: '2025-04-04',
             appointmentTime: '10:30 AM',
@@ -84,8 +84,8 @@ const DoctorPatientsScreen = () => {
         },
         {
             id: '3',
-            name: 'Michael Williams',
-            age: 58,
+            name: 'Abu Miracle',
+            age: 21,
             gender: 'Male',
             appointmentDate: '2025-04-04',
             appointmentTime: '02:15 PM',
@@ -97,8 +97,8 @@ const DoctorPatientsScreen = () => {
         },
         {
             id: '4',
-            name: 'Sofia Garcia',
-            age: 29,
+            name: 'Kantoma Sharon',
+            age: 20,
             gender: 'Female',
             appointmentDate: '2025-04-06',
             appointmentTime: '11:45 AM',
@@ -110,8 +110,8 @@ const DoctorPatientsScreen = () => {
         },
         {
             id: '5',
-            name: 'Robert Chen',
-            age: 67,
+            name: 'Anthony',
+            age: 19,
             gender: 'Male',
             appointmentDate: '2025-04-05',
             appointmentTime: '01:30 PM',
@@ -123,8 +123,8 @@ const DoctorPatientsScreen = () => {
         },
         {
             id: '6',
-            name: 'Linda Davis',
-            age: 52,
+            name: 'Kc',
+            age: 20,
             gender: 'Female',
             appointmentDate: '2025-04-04',
             appointmentTime: '03:45 PM',

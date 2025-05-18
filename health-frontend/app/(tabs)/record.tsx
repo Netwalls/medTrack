@@ -50,7 +50,7 @@ export default function Record() {
                                 size={20}
                                 color="#0D3EED"
                             />
-                            <Text style={styles.doctorName}>Dr. Afna Khan</Text>
+                            <Text style={styles.doctorName}>Dr. Enoch Daniel</Text>
                         </View>
                         <View style={styles.recordFooter}>
                             <View style={styles.hospitalInfo}>
@@ -60,7 +60,7 @@ export default function Record() {
                                     color="#666"
                                 />
                                 <Text style={styles.hospitalName}>
-                                    XYZ Hospital
+                                    Veritas Clinic
                                 </Text>
                             </View>
                             <TouchableOpacity style={styles.downloadButton}>

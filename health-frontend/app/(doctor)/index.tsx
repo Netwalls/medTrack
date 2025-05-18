@@ -60,8 +60,8 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
                 <View style={styles.appointmentSection}>
                     <AppointmentRequestCard
-                        name="Emma Johnson"
-                        details="Cardiology • First Visit"
+                        name="Edet Essang"
+                        details="Student • First Visit"
                         time="Wednesday, Apr 2 • 10:30 AM"
                         onAccept={() => console.log('Accepted appointment')}
                         onReject={() => console.log('Rejected appointment')}
@@ -82,8 +82,8 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
                 <View style={styles.upcomingSection}>
                     <UpcomingAppointmentCard
-                        name="Jessica Williams"
-                        details="Cardiology • Follow-up"
+                        name="Stephanie Nwankwo"
+                        details="Student • Follow-up"
                         time="Today, 1:30 PM"
                         onCall={() => console.log('Call')}
                         onVideo={() => console.log('Video Call')}

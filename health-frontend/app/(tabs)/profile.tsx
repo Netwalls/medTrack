@@ -47,8 +47,8 @@ export default function Profile() {
                         source={require('../../assets/images/dr1.jpeg')}
                         style={styles.profileImage}
                     />
-                    <Text style={styles.name}>John Doe</Text>
-                    <Text style={styles.email}>johndoe@example.com</Text>
+                    <Text style={styles.name}>Stephanie Nwankwo</Text>
+                    <Text style={styles.email}>stephanie@gmail.com</Text>
                 </View>
 
                 {/* Profile Menu */}
