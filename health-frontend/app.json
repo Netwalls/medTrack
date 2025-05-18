@@ -15,14 +15,14 @@
         },
         "ios": {
             "supportsTablet": true,
-            "bundleIdentifier": "com.anonymous.healthfrontend"
+            "bundleIdentifier": "com.medtrack.app"
         },
         "android": {
             "adaptiveIcon": {
                 "foregroundImage": "./assets/images/adaptive-icon.png",
                 "backgroundColor": "#ffffff"
             },
-            "package": "com.anonymous.healthfrontend"
+            "package": "com.medtrack.app"
         },
         "web": {
             "bundler": "metro",
